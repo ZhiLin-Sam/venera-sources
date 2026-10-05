@@ -1,0 +1,14 @@
+{
+  "devDependencies": {
+    "jsdom": "^30.1.2"
+  },
+  "name": "venera-ehentai-source",
+  "version": "0.1.0",
+  "private": "true",
+  "license": "UNLICENSED",
+  "description": "Optimized Venera comic source for E-Hentai/ExHentai, with fixture-driven regression tests",
+  "scripts": {
+    "test": "node --test",
+    "audit": "node harness/audit-fixtures.js"
+  }
+}
