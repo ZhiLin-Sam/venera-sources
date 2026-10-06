@@ -59,3 +59,26 @@
 
 本仓库对上述项目的引用均为**分析、兼容性测试与镜像**目的；除 `sources/mirror/**` 与
 `sources/upstream/**` 明确标注的副本外，未复制其源代码。
+
+## 7. 镜像中的"凭证形态"常量（已评估；公开决定记录在此）
+
+对 73 个镜像文件做过凭证扫描：命中**11 处"凭证形态"字面量，分布在 9 个文件**
+（`jm`、`picacg`、`copy_manga`、`copy_manga_multi_accounts`、`comic_walker`、`gfmh`、
+`manga51`、`manwang`、`noymanga`），字段名形如 `apiKey` / `jmAuthKey` / `kJmSecret` /
+`secret` / `aesKey` / `paramsAesKey` / `api_key`；另有 5 处上游作者的本机绝对路径（macOS 用户目录）。
+
+**决定公开的依据（三条）：**
+
+1. 这些值的性质是**站点协议的客户端常量**（请求签名 / AES / API key）—— 少了它们源根本无法与站点
+   通信，因此不可能是作者的个人账号凭证；
+2. **不新增披露**：本仓镜像的 73 个文件，最初就是从**公开的 jsDelivr 地址匿名获取**的
+   （无任何鉴权即可下载），这些字节此刻已处于公开可下载状态；
+3. 于是剩余风险落在"本仓账号与这些内容的关联"（声誉 / ToS 层面），而**不是披露层面**。
+
+**承诺：收到任何权利人异议，立即删除对应文件并从 `index.json` 移除该条目。**
+
+若日后想采用法律上更保守的形态：`subscription/index.json` 只含清单与 `url` 引用（不含他人代码），
+此时本仓不再分发任何第三方文件。
+
+（另：`tools/validate-catalog.js` 曾把 `manwang_fixed_v120.js:15` 注释行里的 `AES key = "..."` 误报为类字段，
+该工具已删除；合仓后清单由 `npm test` 用真加载器校验，不做正则猜测。）
