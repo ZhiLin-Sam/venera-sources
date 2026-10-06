@@ -73,16 +73,17 @@ const VIRTUAL_PREFIXES = ['169.254.', '198.18.', '198.19.'];
 
 function lanAddresses() {
   const out = [];
-  for (const list of Object.values(os.networkInterfaces())) {
+  for (const [alias, list] of Object.entries(os.networkInterfaces())) {
     for (const iface of list || []) {
       if (iface.family !== 'IPv4' || iface.internal) continue;
       if (VIRTUAL_PREFIXES.some((p) => iface.address.startsWith(p))) continue;
-      out.push(iface.address);
+      out.push({ address: iface.address, alias });
     }
   }
-  // 家用/办公网段优先，方便一眼挑对
+  // 家用/办公网段优先，并**带上网卡名** —— 机器上常有 VMware/Hyper-V/VPN 虚拟网卡，
+  // 不标名字用户会挑错地址（实测本机 4 个候选里有 3 个是虚拟的）。
   const rank = (ip) => (ip.startsWith('192.168.') ? 0 : ip.startsWith('10.') ? 1 : 2);
-  return out.sort((a, b) => rank(a) - rank(b));
+  return out.sort((a, b) => rank(a.address) - rank(b.address));
 }
 
 function parseArgs(argv) {
@@ -105,7 +106,11 @@ if (require.main === module) {
     console.log('');
     console.log('把下面任一地址填进 App 的「漫画源列表」：');
     console.log(`  本机   http://127.0.0.1:${port}/index.json`);
-    for (const ip of lanAddresses()) console.log(`  局域网 http://${ip}:${port}/index.json`);
+    for (const iface of lanAddresses()) {
+      console.log(`  局域网 http://${iface.address}:${port}/index.json   ← 网卡: ${iface.alias}`);
+    }
+    console.log('');
+    console.log('手机测试请选与 Wi-Fi 同网段的那条（本机第 1 条通常是真实 WLAN）。');
     console.log('');
     console.log('清单里的相对路径（sources/mirror/**）由同一服务解析，无需额外配置。');
     console.log('按 Ctrl+C 停止。');
