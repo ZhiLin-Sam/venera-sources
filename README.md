@@ -164,13 +164,20 @@ key / version / minAppVersion 是否与清单一致。**它通过 = 订阅机制
 ### 阶段二：完善后再公开，同一份清单换直链
 
 ```
-https://cdn.jsdelivr.net/gh/ZhiLin-Sam/venera-sources@main/index.json   # 国内推荐（实测匿名 200）
-https://raw.githubusercontent.com/ZhiLin-Sam/venera-sources/main/index.json
+https://cdn.jsdelivr.net/gh/ZhiLin-Sam/venera-sources@main/index.json       # 主（国内直连实测 3/3，92ms）
+https://gcore.jsdelivr.net/gh/ZhiLin-Sam/venera-sources@main/index.json     # 等价备域（实测 3/3，91ms）
+https://fastly.jsdelivr.net/gh/ZhiLin-Sam/venera-sources@main/index.json    # 等价备域（实测 3/3，95ms）
+https://raw.githubusercontent.com/ZhiLin-Sam/venera-sources/main/index.json # 需代理（国内直连实测 0/3）
+https://gh-proxy.com/https://raw.githubusercontent.com/ZhiLin-Sam/venera-sources/main/index.json  # 应急，慢一个数量级
 ```
 
 相对路径以**清单最终 URL** 为基准解析（宿主用 `response.realUri` + `Uri.resolve`），
 所以 `sources/mirror/...` 会自动落到同一基址，**清单内容一个字都不用改**。
 公开前请再确认 [NOTICE.md](NOTICE.md) §4：公开意味着这 73 个第三方文件也一并公开分发。
+
+实测方法与原始数据（含"代理必须关闭"的判定证据）见
+[docs/endpoint-measurement.md](docs/endpoint-measurement.md)：
+国内直连下三个 jsDelivr 域全部 3/3 通（91–141 ms），GitHub 源站 **0/3**，第三方反代要么超时要么慢 10 倍。
 
 ### 另一份可选清单（上游引用版）
 

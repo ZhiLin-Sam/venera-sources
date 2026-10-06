@@ -146,7 +146,9 @@ async function main() {
   for (const h of HOSTS) {
     const entry = { id: h.id, label: h.label, note: h.note, manifest: null, file: null };
     for (const r of hosts) {
-      const n = r === repo ? samples : 1;
+      // 采样数对两个仓库一视同仁：私有仓未公开时全是 404，真正有信息量的恰恰是旁证仓，
+      // 只给它 1 次样本会让排序抖动（实测 Fastly 78ms vs 378ms 就是噪声）。
+      const n = r === repo ? samples : Number(args['probe-samples'] ?? samples);
       const m = await sample(h.manifest(r), n);
       // 源文件路径随仓库布局变化，逐个候选试，取第一个能通的作为该 host 的"相对路径是否成立"证据
       let f = null;
@@ -201,10 +203,14 @@ async function main() {
   }
   console.log('\n  说明：若"清单"200 但"源脚本相对路径"404，则该 host 不能用于订阅；');
   console.log('        私有仓未公开时两者都会是 404（预期）。');
-  console.log(`\n  旁证（公开仓库 ${result.hosts[0]?.probeRepo}）：`);
-  for (const e of result.hosts) {
-    if (!e.probeManifest) continue;
-    console.log(`    ${e.label.padEnd(22)} ${e.probeManifest.status} ${e.probeManifest.ms}ms  |  ${e.probeFile.status} ${e.probeFile.ms}ms`);
+  const withProbe = result.hosts.filter((e) => e.probeManifest);
+  if (withProbe.length) {
+    console.log(`\n  旁证（公开仓库 ${withProbe[0].probeRepo}）：`);
+    for (const e of withProbe) {
+      console.log(
+        `    ${e.label.padEnd(22)} ${e.probeManifest.status} ${e.probeManifest.ms}ms  |  ${e.probeFile.status} ${e.probeFile.ms}ms`,
+      );
+    }
   }
 }
 
