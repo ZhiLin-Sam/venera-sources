@@ -83,6 +83,33 @@ function loadCatalog(dir, label) {
   return entries.map((e) => ({ ...e, repo: label, repoDir: dir }));
 }
 
+/**
+ * 人工覆盖表：**同版本 + 内容不同**时必须显式判定。
+ *
+ * 为什么不能靠"主目录优先"：两边 version 相同时宿主永远不会给用户推更新（它比较的就是版本号），
+ * 于是选错 = 用户长期停留在较差的那份，**而且永远收不到提示**。每条都要写明理由，供复核。
+ */
+const WINNER_OVERRIDES = {
+  comic_walker: {
+    repo: 'venera_comic_source',
+    why:
+      '两边 version 都是 1.0.1；vc 侧缺 han 侧的 _refreshingToken 并发保护、updateAppVersion()、' +
+      '服务端 upgrade_required 处理（本机实测 vc 侧三项标记全无）',
+  },
+  shonen_jump_plus: {
+    repo: 'venera_comic_source',
+    why:
+      '两边 version 都是 1.1.1；han 侧 latestVersion 默认值 4.5.24 高于 vc 的 4.0.24（:13）。' +
+      '注意该字段运行时会从站点响应自我刷新（:42），所以影响小于 comic_walker，但仍应取新值',
+  },
+};
+
+/** 行尾规范化后比较内容：本机 core.autocrlf=true，同一文件在不同检出里可能是 CRLF 或 LF。 */
+function sameContent(a, b) {
+  const norm = (p) => fs.readFileSync(p, 'utf8').replace(/\r\n/g, '\n');
+  return norm(a.absPath) === norm(b.absPath);
+}
+
 function main() {
   const args = parseArgs(process.argv);
   const specs = [
@@ -125,13 +152,19 @@ function main() {
         key: meta.key || e.key,
         version: meta.version || e.version,
         mirrorPath: path.posix.join('sources/mirror', c.label, e.fileName),
+        absPath: dest,
       });
     }
   }
 
-  // 2) 按 key 去重：版本高者胜，同版本主目录优先。
+  // 2) 按 key 去重。版本高者胜；**同版本时不能盲信"主目录优先"** ——
+  //    实测存在"同版本 + 内容不同"、且落选方才是修复版的情况。因为版本号相同，
+  //    宿主永远不会给用户推更新，所以这类冲突必须走人工覆盖表；
+  //    **未登记的冲突直接中止**，绝不允许静默选错。
   const byKey = new Map();
   const decisions = [];
+  const overridesUsed = [];
+  const unresolved = [];
   for (const e of mirrored) {
     const prev = byKey.get(e.key);
     if (!prev) {
@@ -139,10 +172,46 @@ function main() {
       continue;
     }
     const cmp = compareSemVer(e.version, prev.version);
-    const winner = cmp > 0 ? e : prev;
-    const loser = cmp > 0 ? prev : e;
+    let winner;
+    let loser;
+    let reason;
+    if (cmp > 0) {
+      winner = e;
+      loser = prev;
+      reason = '版本更高';
+    } else if (cmp < 0) {
+      winner = prev;
+      loser = e;
+      reason = `版本更高（${prev.repo} 侧）`;
+    } else if (sameContent(prev, e)) {
+      winner = prev;
+      loser = e;
+      reason = '同版本且内容一致（行尾规范化后）→ 主目录优先';
+    } else {
+      const override = WINNER_OVERRIDES[e.key];
+      if (!override) {
+        unresolved.push(
+          `${e.key}: ${prev.repo}/${prev.fileName} 与 ${e.repo}/${e.fileName} 同为 v${e.version} 但内容不同`,
+        );
+        winner = prev;
+        loser = e;
+        reason = '⚠ 未登记的同版本冲突（本应中止）';
+      } else {
+        winner = prev.repo === override.repo ? prev : e;
+        loser = winner === prev ? e : prev;
+        reason = `人工覆盖 → 采用 ${override.repo}：${override.why}`;
+        overridesUsed.push({ key: e.key, repo: override.repo, why: override.why });
+      }
+    }
     byKey.set(e.key, winner);
-    decisions.push({ key: e.key, winner, loser, reason: cmp > 0 ? '版本更高' : '同版本或更低，主目录优先' });
+    decisions.push({ key: e.key, winner, loser, reason });
+  }
+  if (unresolved.length) {
+    throw new Error(
+      '发现未登记的"同版本 + 内容不同"冲突，已中止以免静默选错：\n  ' +
+        unresolved.join('\n  ') +
+        '\n请核对两份实现后，在 harness/build-catalog.js 的 WINNER_OVERRIDES 登记取哪一侧及理由，再重跑。',
+    );
   }
 
   // 3) 自有源覆盖同名 key，并写成清单。
@@ -152,7 +221,7 @@ function main() {
       name: e.name,
       version: e.version,
       fileName: e.mirrorPath,
-      description: `镜像自 ${e.repo}（上游原样，未修改）`,
+      description: `镜像自 ${e.repo}（上游内容原样；行尾经 Git 规范化）`,
     }))
     .sort((a, b) => (a.key < b.key ? -1 : a.key > b.key ? 1 : 0));
 
@@ -177,8 +246,10 @@ function main() {
   lines.push('');
   lines.push(`镜像文件总数：${mirrored.length}（两仓库各自完整镜像，不合并、不覆盖）`);
   lines.push('');
-  lines.push(`## 去重决策（key 重复 ${decisions.length} 组）`);
+  const dupKeyCount = new Set(decisions.map((d) => d.key)).size;
+  lines.push(`## 去重决策（重复 key ${dupKeyCount} 组 / 落选文件 ${decisions.length} 个）`);
   lines.push('');
+  lines.push('两个数字口径不同：一个 key 可能被丢过多次（如 `copy_manga` 有 3 个候选）。');
   if (!decisions.length) {
     lines.push('无重复 key。');
   } else {
@@ -189,6 +260,19 @@ function main() {
         `| \`${d.key}\` | ${d.winner.repo} | ${d.winner.version} | ${d.loser.repo} | ${d.loser.version} | ${d.reason} |`,
       );
     }
+  }
+  lines.push('');
+  lines.push(`## 人工覆盖（同版本 + 内容不同，${overridesUsed.length} 处）`);
+  lines.push('');
+  if (!overridesUsed.length) {
+    lines.push('无。');
+  } else {
+    lines.push('两边 `version` 相同时宿主**不会**推更新，所以这类冲突不能靠"主目录优先"决定：');
+    lines.push('选错意味着用户长期停留在较差的那份，且永远收不到提示。');
+    lines.push('');
+    lines.push('| key | 采纳 | 理由 |');
+    lines.push('|---|---|---|');
+    for (const o of overridesUsed) lines.push(`| \`${o.key}\` | ${o.repo} | ${o.why} |`);
   }
   lines.push('');
   lines.push(`## 上游清单版本与实际脚本不符（已按脚本纠正，${versionFixes.length} 处）`);
@@ -212,16 +296,19 @@ function main() {
   lines.push('');
   lines.push('## 许可证提醒');
   lines.push('');
-  lines.push('两个上游仓库都**没有声明任何许可证**（默认 = 保留所有权利）。');
-  lines.push('本目录只是本地私有镜像，用于个人研究与离线回归测试；');
-  lines.push('若要公开分发，必须逐一取得授权或改为在 `index.json` 中引用上游原始地址（`url` 字段）。');
+  lines.push('两个上游仓库都**没有声明任何许可证**（默认 = 保留所有权利），本目录是其衍生镜像。');
+  lines.push('若本仓为公开仓库，这些文件即属**公开再分发**，责任由本仓承担；');
+  lines.push('收到权利人异议应即删除对应文件。更保守的替代形态是 `subscription/index.json`');
+  lines.push('（只含清单 + `url` 指向上游，不含他人代码）。');
+  lines.push('另：字节级比对前请先统一行尾 —— 本机 `core.autocrlf=true` 会把镜像文件的行尾规范化。');
   lines.push('');
   fs.mkdirSync(path.join(ROOT, 'docs'), { recursive: true });
   fs.writeFileSync(path.join(ROOT, 'docs', 'mirror-provenance.md'), lines.join('\n'), 'utf8');
 
   console.log(`镜像文件: ${mirrored.length}`);
   console.log(`清单条目: ${entries.length}（含自有 ${OWN_SOURCE.key}）`);
-  console.log(`去重决策: ${decisions.length} 组`);
+  console.log(`去重决策: ${decisions.length} 次判定（重复 key ${new Set(decisions.map((d) => d.key)).size} 组）`);
+  console.log(`人工覆盖（同版本内容不同）: ${overridesUsed.length} 处`);
   console.log(`版本纠正（按脚本为准）: ${versionFixes.length} 处`);
   const repos = {};
   for (const e of entries) {

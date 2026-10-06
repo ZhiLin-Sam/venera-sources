@@ -110,3 +110,29 @@ test('自有源 ES2022 兼容守卫', () => {
   const found = findTooNew(fs.readFileSync(SOURCE, 'utf8'));
   assert.deepEqual(found, [], `使用了新于 ES2022 的特性，App 内会失败: ${found.join(', ')}`);
 });
+
+test('subscription/index.json（对外发布的那份）与 index.json 一致且全部走 url', () => {
+  const subFile = path.join(ROOT, 'subscription', 'index.json');
+  if (!fs.existsSync(subFile)) return; // 未生成时跳过
+  const sub = JSON.parse(fs.readFileSync(subFile, 'utf8'));
+  const main = readIndex();
+  assert.ok(Array.isArray(sub), 'subscription/index.json 必须是数组');
+
+  const subByKey = new Map(sub.map((e) => [e.key, e]));
+  assert.equal(subByKey.size, sub.length, 'subscription/index.json 的 key 必须唯一');
+
+  for (const entry of sub) {
+    assert.ok(entry.url, `subscription 条目必须用 url（key=${entry.key}）`);
+    assert.ok(!entry.fileName, `subscription 条目不应带 fileName（key=${entry.key}）`);
+    const mainEntry = main.find((m) => m.key === entry.key);
+    assert.ok(mainEntry, `subscription 有 main 清单里没有的 key: ${entry.key}`);
+    assert.equal(
+      entry.version,
+      mainEntry.version,
+      `${entry.key}: 两份清单版本不一致（sub=${entry.version} main=${mainEntry.version}）`,
+    );
+  }
+  for (const entry of main) {
+    assert.ok(subByKey.has(entry.key), `main 有 subscription 没有的 key: ${entry.key}`);
+  }
+});

@@ -4,91 +4,91 @@
     "name": "古风漫画",
     "version": "1.3.0",
     "fileName": "sources/mirror/venera_comic_source/gfmh.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "Komiic",
     "name": "Komiic",
     "version": "1.0.8",
     "fileName": "sources/mirror/venera_comic_source/komiic_dual.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "ManHuaGui",
     "name": "漫画柜",
     "version": "1.2.1",
     "fileName": "sources/mirror/venera-configs/manhuagui.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "baihehui",
     "name": "百合会",
     "version": "1.0.0",
     "fileName": "sources/mirror/venera_comic_source/baihehui.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "baozi",
     "name": "包子漫画",
     "version": "1.1.6",
     "fileName": "sources/mirror/venera-configs/baozi.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "bilimanga",
     "name": "嗶哩漫畫",
     "version": "1.1.7",
     "fileName": "sources/mirror/venera_comic_source/bilimanga.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "ccc",
     "name": "CCC追漫台",
     "version": "1.0.1",
     "fileName": "sources/mirror/venera-configs/ccc.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "comic_walker",
     "name": "カドコミ",
     "version": "1.0.1",
-    "fileName": "sources/mirror/venera-configs/comic_walker.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "fileName": "sources/mirror/venera_comic_source/comic_walker.js",
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "comick",
     "name": "comick",
     "version": "1.2.0",
     "fileName": "sources/mirror/venera-configs/comick.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "copy_manga",
     "name": "拷贝漫画",
     "version": "1.6.6",
     "fileName": "sources/mirror/venera_comic_source/copy_manga.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "dm5",
     "name": "动漫屋",
     "version": "7.0.3",
     "fileName": "sources/mirror/venera_comic_source/dm5.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "dongman_la",
     "name": "动漫啦",
     "version": "1.0.1",
     "fileName": "sources/mirror/venera_comic_source/dongman_la_fixed_v101.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "dongmanmanhua",
     "name": "咚漫",
     "version": "1.0.6",
     "fileName": "sources/mirror/venera_comic_source/dongmanmanhua.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "ehentai",
@@ -102,300 +102,300 @@
     "name": "飞翔漫画",
     "version": "1.0.1",
     "fileName": "sources/mirror/venera_comic_source/ffppt.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "goda",
     "name": "GoDa漫画",
     "version": "1.2.1",
     "fileName": "sources/mirror/venera-configs/goda.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "guazimanhua",
     "name": "瓜子漫画",
     "version": "1.0.4",
     "fileName": "sources/mirror/venera_comic_source/guazi_manhua_v1.1.0.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "happy",
     "name": "嗨皮漫画",
     "version": "1.0.0",
     "fileName": "sources/mirror/venera-configs/happy.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "hcomic",
     "name": "H-Comic",
     "version": "1.0.0",
     "fileName": "sources/mirror/venera-configs/hcomic.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "hipmh",
     "name": "嬉皮漫畫",
     "version": "1.0.1",
     "fileName": "sources/mirror/venera_comic_source/hipmh.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "hitomi",
     "name": "hitomi.la",
     "version": "1.1.2",
     "fileName": "sources/mirror/venera-configs/hitomi.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "hot_manga",
     "name": "热辣漫画",
     "version": "1.0.0",
     "fileName": "sources/mirror/venera-configs/hot_manga.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "ikmmh",
     "name": "爱看漫",
     "version": "1.0.6",
     "fileName": "sources/mirror/venera-configs/ikmmh.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "ikmmh_v2",
     "name": "爱看漫",
     "version": "3.0.0",
     "fileName": "sources/mirror/venera_comic_source/ikmmh_v2.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "jcomic",
     "name": "jcomic.net",
     "version": "1.0.0",
     "fileName": "sources/mirror/venera-configs/jcomic.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "jm",
     "name": "禁漫天堂",
     "version": "1.4.0",
     "fileName": "sources/mirror/venera-configs/jm.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "kavita",
     "name": "Kavita",
     "version": "1.0.0",
     "fileName": "sources/mirror/venera-configs/kavita.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "komga",
     "name": "Komga",
     "version": "1.0.0",
     "fileName": "sources/mirror/venera-configs/komga.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "laimanhua_split",
     "name": "来漫画（分流）",
     "version": "1.2.1",
     "fileName": "sources/mirror/venera_comic_source/laimanhua_split_hosts_v1.2.1_configurable.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "lanraragi",
     "name": "Lanraragi",
     "version": "1.2.0",
     "fileName": "sources/mirror/venera-configs/lanraragi.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "manga51",
     "name": "51漫画",
     "version": "1.2.0",
     "fileName": "sources/mirror/venera_comic_source/manga51.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "manga_dex",
     "name": "MangaDex",
     "version": "1.2.0",
     "fileName": "sources/mirror/venera-configs/manga_dex.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "manhuaren",
     "name": "漫画人",
     "version": "1.0.0",
     "fileName": "sources/mirror/venera-configs/manhuaren.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "manhuauo_banana_v2",
     "name": "香蕉漫画",
     "version": "1.0.3",
     "fileName": "sources/mirror/venera_comic_source/manhuauo_fixed_v2.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "manwaba",
     "name": "漫蛙吧",
     "version": "1.1.3",
     "fileName": "sources/mirror/venera_comic_source/manwaba_fixed_v113.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "manwang",
     "name": "漫网",
     "version": "1.2.0",
     "fileName": "sources/mirror/venera_comic_source/manwang_fixed_v120.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "mh1234",
     "name": "漫画1234",
     "version": "1.0.0",
     "fileName": "sources/mirror/venera-configs/mh1234.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "mh18",
     "name": "18漫画",
     "version": "1.0.0",
     "fileName": "sources/mirror/venera-configs/mh18.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "mh4399",
     "name": "4399漫画网",
     "version": "1.0.3",
     "fileName": "sources/mirror/venera_comic_source/mh4399.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "mojoin_v2",
     "name": "MOJOIN",
     "version": "1.0.7",
     "fileName": "sources/mirror/venera_comic_source/mojoin_fixed_v107.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "mxs",
     "name": "漫小肆",
     "version": "1.0.0",
     "fileName": "sources/mirror/venera-configs/mxs.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "mycomic",
     "name": "MYCOMIC",
     "version": "1.1.0",
     "fileName": "sources/mirror/venera-configs/mycomic.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "nhentai",
     "name": "nhentai",
     "version": "1.1.0",
     "fileName": "sources/mirror/venera-configs/nhentai.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "noymanga",
     "name": "NoyManga",
     "version": "1.1.5",
     "fileName": "sources/mirror/venera_comic_source/noymanga.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "picacg",
     "name": "Picacg",
     "version": "1.0.6",
     "fileName": "sources/mirror/venera-configs/picacg.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "qq_comic_official_v1",
     "name": "腾讯动漫（正版）",
     "version": "1.0.3",
     "fileName": "sources/mirror/venera_comic_source/tencent_comic_official.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "rawkuma",
     "name": "Rawkuma",
     "version": "1.1.0",
     "fileName": "sources/mirror/venera_comic_source/rawkuma.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "rumanhua_fixed_v15",
     "name": "如漫画",
     "version": "1.2.8",
     "fileName": "sources/mirror/venera_comic_source/rumanhua_fixed_v16.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "sfacg_manhua",
     "name": "SF漫画",
     "version": "1.0.0",
     "fileName": "sources/mirror/venera_comic_source/sfacg_manhua.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "shonen_jump_plus",
     "name": "少年ジャンプ＋",
     "version": "1.1.1",
-    "fileName": "sources/mirror/venera-configs/shonen_jump_plus.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "fileName": "sources/mirror/venera_comic_source/shonen_jump_plus.js",
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "tuku_cc",
     "name": "图库漫画",
     "version": "1.0.1",
     "fileName": "sources/mirror/venera_comic_source/tuku_cc.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "webtoons_zh_hant",
     "name": "LINE WEBTOON",
     "version": "1.0.0",
     "fileName": "sources/mirror/venera_comic_source/webtoons_zh_hant.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "wmanhua",
     "name": "W漫画",
     "version": "1.0.1",
     "fileName": "sources/mirror/venera_comic_source/wmanhua.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "wnacg",
     "name": "紳士漫畫",
     "version": "1.0.6",
     "fileName": "sources/mirror/venera-configs/wnacg.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "ykmh",
     "name": "优酷漫画 (修复版)",
     "version": "1.0.6",
     "fileName": "sources/mirror/venera_comic_source/youku.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "zaimanhua",
     "name": "再漫画",
     "version": "1.0.2",
     "fileName": "sources/mirror/venera-configs/zaimanhua.js",
-    "description": "镜像自 venera-configs（上游原样，未修改）"
+    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "zerobyw33",
     "name": "zero搬运网",
     "version": "1.2.0",
     "fileName": "sources/mirror/venera_comic_source/zerobyw33.js",
-    "description": "镜像自 venera_comic_source（上游原样，未修改）"
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   }
 ]

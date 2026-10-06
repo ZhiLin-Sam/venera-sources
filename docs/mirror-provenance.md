@@ -11,26 +11,37 @@
 
 镜像文件总数：73（两仓库各自完整镜像，不合并、不覆盖）
 
-## 去重决策（key 重复 16 组）
+## 去重决策（重复 key 15 组 / 落选文件 16 个）
 
+两个数字口径不同：一个 key 可能被丢过多次（如 `copy_manga` 有 3 个候选）。
 | key | 采纳 | 版本 | 未采纳 | 版本 | 依据 |
 |---|---|---|---|---|---|
 | `Komiic` | venera_comic_source | 1.0.8 | venera-configs | 1.0.3 | 版本更高 |
-| `ManHuaGui` | venera-configs | 1.2.1 | venera_comic_source | 1.2.1 | 同版本或更低，主目录优先 |
-| `baozi` | venera-configs | 1.1.6 | venera_comic_source | 1.1.6 | 同版本或更低，主目录优先 |
-| `ccc` | venera-configs | 1.0.1 | venera_comic_source | 1.0.1 | 同版本或更低，主目录优先 |
-| `comic_walker` | venera-configs | 1.0.1 | venera_comic_source | 1.0.1 | 同版本或更低，主目录优先 |
-| `comick` | venera-configs | 1.2.0 | venera_comic_source | 1.2.0 | 同版本或更低，主目录优先 |
-| `copy_manga` | venera-configs | 1.4.2 | venera-configs | 1.4.1 | 同版本或更低，主目录优先 |
+| `ManHuaGui` | venera-configs | 1.2.1 | venera_comic_source | 1.2.1 | 同版本且内容一致（行尾规范化后）→ 主目录优先 |
+| `baozi` | venera-configs | 1.1.6 | venera_comic_source | 1.1.6 | 同版本且内容一致（行尾规范化后）→ 主目录优先 |
+| `ccc` | venera-configs | 1.0.1 | venera_comic_source | 1.0.1 | 同版本且内容一致（行尾规范化后）→ 主目录优先 |
+| `comic_walker` | venera_comic_source | 1.0.1 | venera-configs | 1.0.1 | 人工覆盖 → 采用 venera_comic_source：两边 version 都是 1.0.1；vc 侧缺 han 侧的 _refreshingToken 并发保护、updateAppVersion()、服务端 upgrade_required 处理（本机实测 vc 侧三项标记全无） |
+| `comick` | venera-configs | 1.2.0 | venera_comic_source | 1.2.0 | 同版本且内容一致（行尾规范化后）→ 主目录优先 |
+| `copy_manga` | venera-configs | 1.4.2 | venera-configs | 1.4.1 | 版本更高（venera-configs 侧） |
 | `copy_manga` | venera_comic_source | 1.6.6 | venera-configs | 1.4.2 | 版本更高 |
-| `goda` | venera-configs | 1.2.1 | venera_comic_source | 1.2.1 | 同版本或更低，主目录优先 |
-| `manga_dex` | venera-configs | 1.2.0 | venera_comic_source | 1.1.1 | 同版本或更低，主目录优先 |
-| `manhuaren` | venera-configs | 1.0.0 | venera_comic_source | 1.0.0 | 同版本或更低，主目录优先 |
+| `goda` | venera-configs | 1.2.1 | venera_comic_source | 1.2.1 | 同版本且内容一致（行尾规范化后）→ 主目录优先 |
+| `manga_dex` | venera-configs | 1.2.0 | venera_comic_source | 1.1.1 | 版本更高（venera-configs 侧） |
+| `manhuaren` | venera-configs | 1.0.0 | venera_comic_source | 1.0.0 | 同版本且内容一致（行尾规范化后）→ 主目录优先 |
 | `manwaba` | venera_comic_source | 1.1.3 | venera-configs | 1.0.3 | 版本更高 |
-| `mycomic` | venera-configs | 1.1.0 | venera_comic_source | 1.1.0 | 同版本或更低，主目录优先 |
-| `shonen_jump_plus` | venera-configs | 1.1.1 | venera_comic_source | 1.1.1 | 同版本或更低，主目录优先 |
+| `mycomic` | venera-configs | 1.1.0 | venera_comic_source | 1.1.0 | 同版本且内容一致（行尾规范化后）→ 主目录优先 |
+| `shonen_jump_plus` | venera_comic_source | 1.1.1 | venera-configs | 1.1.1 | 人工覆盖 → 采用 venera_comic_source：两边 version 都是 1.1.1；han 侧 latestVersion 默认值 4.5.24 高于 vc 的 4.0.24（:13）。注意该字段运行时会从站点响应自我刷新（:42），所以影响小于 comic_walker，但仍应取新值 |
 | `ykmh` | venera_comic_source | 1.0.6 | venera-configs | 1.0.0 | 版本更高 |
-| `zaimanhua` | venera-configs | 1.0.2 | venera_comic_source | 1.0.2 | 同版本或更低，主目录优先 |
+| `zaimanhua` | venera-configs | 1.0.2 | venera_comic_source | 1.0.2 | 同版本且内容一致（行尾规范化后）→ 主目录优先 |
+
+## 人工覆盖（同版本 + 内容不同，2 处）
+
+两边 `version` 相同时宿主**不会**推更新，所以这类冲突不能靠"主目录优先"决定：
+选错意味着用户长期停留在较差的那份，且永远收不到提示。
+
+| key | 采纳 | 理由 |
+|---|---|---|
+| `comic_walker` | venera_comic_source | 两边 version 都是 1.0.1；vc 侧缺 han 侧的 _refreshingToken 并发保护、updateAppVersion()、服务端 upgrade_required 处理（本机实测 vc 侧三项标记全无） |
+| `shonen_jump_plus` | venera_comic_source | 两边 version 都是 1.1.1；han 侧 latestVersion 默认值 4.5.24 高于 vc 的 4.0.24（:13）。注意该字段运行时会从站点响应自我刷新（:42），所以影响小于 comic_walker，但仍应取新值 |
 
 ## 上游清单版本与实际脚本不符（已按脚本纠正，4 处）
 
@@ -48,6 +59,8 @@
 
 ## 许可证提醒
 
-两个上游仓库都**没有声明任何许可证**（默认 = 保留所有权利）。
-本目录只是本地私有镜像，用于个人研究与离线回归测试；
-若要公开分发，必须逐一取得授权或改为在 `index.json` 中引用上游原始地址（`url` 字段）。
+两个上游仓库都**没有声明任何许可证**（默认 = 保留所有权利），本目录是其衍生镜像。
+若本仓为公开仓库，这些文件即属**公开再分发**，责任由本仓承担；
+收到权利人异议应即删除对应文件。更保守的替代形态是 `subscription/index.json`
+（只含清单 + `url` 指向上游，不含他人代码）。
+另：字节级比对前请先统一行尾 —— 本机 `core.autocrlf=true` 会把镜像文件的行尾规范化。
