@@ -104,6 +104,22 @@ const WINNER_OVERRIDES = {
   },
 };
 
+/**
+ * 语义冗余（同一站点的不同 key）：旧版**不再列入清单**，但文件仍保留在镜像里（可随时恢复）。
+ *
+ * 与 WINNER_OVERRIDES 的区别：那个是"同 key 选哪一份"，这个是"两个 key 其实是同一站点"。
+ * 不处理的话，用户会在源列表里看到同一站点的两个条目，不知道该装哪个。
+ * 判据与证据见 docs/redundancy-strategy.md（L2）。
+ */
+const SUPERSEDED_KEYS = {
+  ikmmh: {
+    supersededBy: 'ikmmh_v2',
+    why:
+      '同一站点：两者都暴露 base_url 设置且三要素相同，实现相似度 78.6%；ikmmh_v2 是 v3.0.0 重写版，' +
+      'ikmmh v1.0.6 已过时。旧文件保留在镜像中，仅不列入清单（需恢复时删掉此条即可）。',
+  },
+};
+
 /** 行尾规范化后比较内容：本机 core.autocrlf=true，同一文件在不同检出里可能是 CRLF 或 LF。 */
 function sameContent(a, b) {
   const norm = (p) => fs.readFileSync(p, 'utf8').replace(/\r\n/g, '\n');
@@ -214,6 +230,15 @@ function main() {
     );
   }
 
+  // 2b) 语义冗余：同一站点的不同 key（L2）。旧版只从清单里摘掉，镜像文件保留。
+  const superseded = [];
+  for (const [key, info] of Object.entries(SUPERSEDED_KEYS)) {
+    if (byKey.has(key) && byKey.has(info.supersededBy)) {
+      superseded.push({ key, dropped: byKey.get(key), kept: info.supersededBy, why: info.why });
+      byKey.delete(key);
+    }
+  }
+
   // 3) 自有源覆盖同名 key，并写成清单。
   const entries = [...byKey.values()]
     .map((e) => ({
@@ -259,6 +284,21 @@ function main() {
       lines.push(
         `| \`${d.key}\` | ${d.winner.repo} | ${d.winner.version} | ${d.loser.repo} | ${d.loser.version} | ${d.reason} |`,
       );
+    }
+  }
+  lines.push('');
+  lines.push(`## 语义冗余（同站不同 key，从清单摘除 ${superseded.length} 条）`);
+  lines.push('');
+  if (!superseded.length) {
+    lines.push('无。');
+  } else {
+    lines.push('这些条目与另一个 key 指向**同一站点**，同时列出会让用户不知道该装哪个；');
+    lines.push('旧版文件仍保留在镜像中，需要时可从本表恢复（删掉 `SUPERSEDED_KEYS` 对应条目即可）。');
+    lines.push('');
+    lines.push('| 摘除 | 版本 | 保留 | 理由 |');
+    lines.push('|---|---|---|---|');
+    for (const s of superseded) {
+      lines.push(`| \`${s.key}\` | ${s.dropped.version} | \`${s.kept}\` | ${s.why} |`);
     }
   }
   lines.push('');
@@ -309,6 +349,7 @@ function main() {
   console.log(`清单条目: ${entries.length}（含自有 ${OWN_SOURCE.key}）`);
   console.log(`去重决策: ${decisions.length} 次判定（重复 key ${new Set(decisions.map((d) => d.key)).size} 组）`);
   console.log(`人工覆盖（同版本内容不同）: ${overridesUsed.length} 处`);
+  console.log(`语义冗余摘除（同站不同 key）: ${superseded.length} 条`);
   console.log(`版本纠正（按脚本为准）: ${versionFixes.length} 处`);
   const repos = {};
   for (const e of entries) {
@@ -320,4 +361,4 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = { compareSemVer, OWN_SOURCE };
+module.exports = { compareSemVer, OWN_SOURCE, WINNER_OVERRIDES, SUPERSEDED_KEYS };

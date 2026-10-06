@@ -154,13 +154,6 @@
     "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
   },
   {
-    "key": "ikmmh",
-    "name": "爱看漫",
-    "version": "1.0.6",
-    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/ikmmh.js",
-    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
-  },
-  {
     "key": "ikmmh_v2",
     "name": "爱看漫",
     "version": "3.0.0",

@@ -154,13 +154,6 @@
     "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
-    "key": "ikmmh",
-    "name": "爱看漫",
-    "version": "1.0.6",
-    "fileName": "sources/mirror/venera-configs/ikmmh.js",
-    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
-  },
-  {
     "key": "ikmmh_v2",
     "name": "爱看漫",
     "version": "3.0.0",

@@ -23,7 +23,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { loadSource } = require('./runtime');
 const { HOST_STUBS } = require('./validate-sources');
-const { compareSemVer } = require('./build-catalog');
+const { compareSemVer, SUPERSEDED_KEYS } = require('./build-catalog');
 
 const ROOT = path.join(__dirname, '..');
 const OUT = path.join(ROOT, 'subscription', 'index.json');
@@ -106,6 +106,11 @@ function build(upstreamDirs) {
       }
       if (compareSemVer(candidate.version, prev.version) > 0) byKey.set(key, candidate);
     }
+  }
+  // 语义冗余（同站不同 key）必须与 index.json 保持一致地摘除，
+  // 否则两份清单条数不同 —— 这是被 tests/source-repo.test.js 抓出来的真实缺陷。
+  for (const [key, info] of Object.entries(SUPERSEDED_KEYS)) {
+    if (byKey.has(key) && byKey.has(info.supersededBy)) byKey.delete(key);
   }
   return { entries: [...byKey.values()].sort((a, b) => (a.key < b.key ? -1 : 1)), corrections };
 }
