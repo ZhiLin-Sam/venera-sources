@@ -26,7 +26,11 @@ const MIME = {
   '.html': 'text/html; charset=utf-8',
 };
 
-const NEVER_SERVE = new Set(['.git', 'node_modules', 'tmp']);
+/**
+ * 只放行订阅真正需要的路径，其余（docs/ tests/ fixtures/ AGENTS.md 等）一律 403。
+ * 这个服务绑在 0.0.0.0 上给局域网用，能不暴露就不暴露。
+ */
+const ALLOW = [/^index\.json$/, /^subscription\//, /^sources\//];
 
 function createStaticServer(root) {
   const rootResolved = path.resolve(root);
@@ -39,8 +43,8 @@ function createStaticServer(root) {
       return;
     }
     const rel = pathname.replace(/^\/+/, '');
-    // 不暴露 .git / node_modules 等；并防目录穿越
-    if (rel.split('/').some((seg) => NEVER_SERVE.has(seg))) {
+    // 白名单 + 目录穿越防护
+    if (!ALLOW.some((re) => re.test(rel))) {
       res.writeHead(403, { 'content-type': 'text/plain' }).end('forbidden');
       return;
     }
@@ -64,14 +68,21 @@ function createStaticServer(root) {
   });
 }
 
+/** 链路本地与已知虚拟网段（WSL/Hyper-V/VirtualBox/VMware）会让用户挑错地址，过滤掉。 */
+const VIRTUAL_PREFIXES = ['169.254.', '198.18.', '198.19.'];
+
 function lanAddresses() {
   const out = [];
   for (const list of Object.values(os.networkInterfaces())) {
     for (const iface of list || []) {
-      if (iface.family === 'IPv4' && !iface.internal) out.push(iface.address);
+      if (iface.family !== 'IPv4' || iface.internal) continue;
+      if (VIRTUAL_PREFIXES.some((p) => iface.address.startsWith(p))) continue;
+      out.push(iface.address);
     }
   }
-  return out;
+  // 家用/办公网段优先，方便一眼挑对
+  const rank = (ip) => (ip.startsWith('192.168.') ? 0 : ip.startsWith('10.') ? 1 : 2);
+  return out.sort((a, b) => rank(a) - rank(b));
 }
 
 function parseArgs(argv) {
