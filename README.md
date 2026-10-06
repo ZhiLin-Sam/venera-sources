@@ -141,31 +141,43 @@ node harness/validate-sources.js sources/mirror/venera-configs
 >   `response.realUri.toString()` **原文写进 App 日志**（请求头有打码，URL 没有），
 >   用户一报 bug 就把 token 贴出来了。
 
-所以本仓库刻意分成**两份清单**：
+本项目的订阅**全部基于本仓库自己的副本**，不指向上游实时文件 ——
+上游文件随时可能被改动且无法预先审查，而本仓库的 73 个镜像都经过加载体检与元数据核对。
 
-| 清单 | 用途 | 形态 | 是否含第三方代码 |
-|---|---|---|---|
-| `index.json`（仓库根） | 私有，镜像版：`fileName` 指向本地镜像 | 57 条 | **是**（73 个文件的镜像） |
-| `subscription/index.json` | **订阅版**：每条都是 `url` 指向**上游公开地址** | 57 条 / 15 KB | **否** |
+所以 `index.json`（仓库根，57 条，`fileName` 指向 `sources/mirror/**`）**就是订阅清单**。
 
-订阅版由下面这条命令生成，`--verify` 会**逐条匿名校验可达性**（当前 **57/57 可达**）：
+### 阶段一：先在本机把订阅机制调通（零暴露、不需要公开）
 
 ```powershell
-node harness/build-subscription.js --venera-configs <A> --venera-comic-source <B> --verify
+npm run serve        # 起静态服务，默认 http://127.0.0.1:8899，同时打印局域网地址
+npm run verify:sub   # 端到端验证订阅机制（取清单 → 解析相对路径 → 逐个下载 → 校验元数据）
 ```
 
-因为它**不含任何他人代码**，所以可以安全地放在**公开**位置：
+- Windows 上测试：把 `http://127.0.0.1:8899/index.json` 填进 App 的「漫画源列表」；
+- 手机上测试：用 `serve` 打印出的局域网地址，如 `http://192.168.x.x:8899/index.json`；
+- 全程不对外暴露任何内容，也不需要 token。
 
-```jsonc
-// 放在公开仓库 ZhiLin-Sam/<repo> 后的订阅地址（国内推荐 jsDelivr）
-https://cdn.jsdelivr.net/gh/ZhiLin-Sam/<repo>@main/index.json
-// 或 GitHub 原文
-https://raw.githubusercontent.com/ZhiLin-Sam/<repo>/main/index.json
+`verify:sub` 会在进程内起同一个静态服务，按宿主的真实行为走一遍：
+取清单 → **以清单最终 URL 为基准**解析每个 `fileName` → 逐个下载 → 校验
+key / version / minAppVersion 是否与清单一致。**它通过 = 订阅机制理论成立。**
+
+### 阶段二：完善后再公开，同一份清单换直链
+
+```
+https://cdn.jsdelivr.net/gh/ZhiLin-Sam/venera-sources@main/index.json   # 国内推荐（实测匿名 200）
+https://raw.githubusercontent.com/ZhiLin-Sam/venera-sources/main/index.json
 ```
 
-私有仓库 `venera-sources` 继续只作本地离线测试与解析回归用。
-若日后发布了自有优化版 `ehentai.js`，用 `--own-ehentai-url <U>` 把该条指过去即可
-（当前默认指向上游，授权最干净）。
+相对路径以**清单最终 URL** 为基准解析（宿主用 `response.realUri` + `Uri.resolve`），
+所以 `sources/mirror/...` 会自动落到同一基址，**清单内容一个字都不用改**。
+公开前请再确认 [NOTICE.md](NOTICE.md) §4：公开意味着这 73 个第三方文件也一并公开分发。
+
+### 另一份可选清单（上游引用版）
+
+`node harness/build-subscription.js ... --verify` 会另生成 `subscription/index.json`：
+每条用 `url` 指向上游公开地址、**不含任何他人代码**（57 条 / 15 KB，实测 57/57 匿名可达）。
+它只在需要"许可证最干净的公开形态"时使用，**不是默认订阅清单**。
+若日后发布了自有优化版 `ehentai.js`，用 `--own-ehentai-url <U>` 把该条指过去即可。
 
 ## 授权
 

@@ -9,6 +9,8 @@
   "description": "私有 Venera 源目录仓库：汇总 57 个源（镜像 + 去重 + 体检），并为自有源提供夹具驱动的离线回归测试台",
   "scripts": {
     "test": "node --test",
-    "audit": "node harness/audit-fixtures.js"
+    "audit": "node harness/audit-fixtures.js",
+    "serve": "node harness/serve.js",
+    "verify:sub": "node harness/verify-subscription.js --serve-port 8899"
   }
 }
