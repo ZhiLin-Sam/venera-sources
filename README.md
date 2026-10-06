@@ -130,6 +130,43 @@ node harness/validate-sources.js sources/mirror/venera-configs
 | **2** | 功能补齐：把 CN_SXJ 有、上游源没有的能力搬进自有源（排行榜 / 详情页字段 / 归档 / 评论投票 / 高级搜索 / tag 命名空间） | 待办 |
 | **3** | 反封与稳健：509 检测 + `skipHathKey` 一次性令牌重试、统一响应体检（Sad Panda / kokomade / 空 body）、IP 封禁识别、多域名灾备、把静默 `catch` 改为可上报「跳过几行、首个原因」 | 待办 |
 
+## 订阅链接（怎么发出去）
+
+订阅 = 把 `index.json` 的地址填进 App 的「漫画源列表」。这里有一个**硬约束**，先说清楚：
+
+> 宿主取清单时是**匿名、且无法自定义请求头**的请求（`source_repositories.dart:206`
+> 只带 `{'cache-time': 'no'}`）。因此：
+> - **私有仓库的 raw 地址取不到** —— 实测匿名请求 `<私有仓>/raw/main/index.json` 返回 **HTTP 404**；
+> - **token 也不能塞进 URL** —— `app_dio.dart:155` 每次请求都会把
+>   `response.realUri.toString()` **原文写进 App 日志**（请求头有打码，URL 没有），
+>   用户一报 bug 就把 token 贴出来了。
+
+所以本仓库刻意分成**两份清单**：
+
+| 清单 | 用途 | 形态 | 是否含第三方代码 |
+|---|---|---|---|
+| `index.json`（仓库根） | 私有，镜像版：`fileName` 指向本地镜像 | 57 条 | **是**（73 个文件的镜像） |
+| `subscription/index.json` | **订阅版**：每条都是 `url` 指向**上游公开地址** | 57 条 / 15 KB | **否** |
+
+订阅版由下面这条命令生成，`--verify` 会**逐条匿名校验可达性**（当前 **57/57 可达**）：
+
+```powershell
+node harness/build-subscription.js --venera-configs <A> --venera-comic-source <B> --verify
+```
+
+因为它**不含任何他人代码**，所以可以安全地放在**公开**位置：
+
+```jsonc
+// 放在公开仓库 ZhiLin-Sam/<repo> 后的订阅地址（国内推荐 jsDelivr）
+https://cdn.jsdelivr.net/gh/ZhiLin-Sam/<repo>@main/index.json
+// 或 GitHub 原文
+https://raw.githubusercontent.com/ZhiLin-Sam/<repo>/main/index.json
+```
+
+私有仓库 `venera-sources` 继续只作本地离线测试与解析回归用。
+若日后发布了自有优化版 `ehentai.js`，用 `--own-ehentai-url <U>` 把该条指过去即可
+（当前默认指向上游，授权最干净）。
+
 ## 授权
 
 上游两个源仓库**都没有声明任何许可证**（默认 = 保留所有权利），本仓库是其**衍生镜像**，

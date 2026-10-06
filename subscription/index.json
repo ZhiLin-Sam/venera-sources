@@ -1,0 +1,401 @@
+[
+  {
+    "key": "GfmhApp",
+    "name": "古风漫画",
+    "version": "1.3.0",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/gfmh.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "Komiic",
+    "name": "Komiic",
+    "version": "1.0.8",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/komiic_dual.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "ManHuaGui",
+    "name": "漫画柜",
+    "version": "1.2.1",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/manhuagui.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "baihehui",
+    "name": "百合会",
+    "version": "1.0.0",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/baihehui.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "baozi",
+    "name": "包子漫画",
+    "version": "1.1.6",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/baozi.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "bilimanga",
+    "name": "嗶哩漫畫",
+    "version": "1.1.7",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/bilimanga.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "ccc",
+    "name": "CCC追漫台",
+    "version": "1.0.1",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/ccc.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "comic_walker",
+    "name": "カドコミ",
+    "version": "1.0.1",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/comic_walker.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "comick",
+    "name": "comick",
+    "version": "1.2.0",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/comick.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "copy_manga",
+    "name": "拷贝漫画",
+    "version": "1.6.6",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/copy_manga.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "dm5",
+    "name": "动漫屋",
+    "version": "7.0.3",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/dm5.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "dongman_la",
+    "name": "动漫啦",
+    "version": "1.0.1",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/dongman_la_fixed_v101.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "dongmanmanhua",
+    "name": "咚漫",
+    "version": "1.0.6",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/dongmanmanhua.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "ehentai",
+    "name": "ehentai",
+    "version": "1.2.0",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/ehentai.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "ffppt",
+    "name": "飞翔漫画",
+    "version": "1.0.1",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/ffppt.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "goda",
+    "name": "GoDa漫画",
+    "version": "1.2.1",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/goda.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "guazimanhua",
+    "name": "瓜子漫画",
+    "version": "1.0.4",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/guazi_manhua_v1.1.0.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "happy",
+    "name": "嗨皮漫画",
+    "version": "1.0.0",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/happy.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "hcomic",
+    "name": "H-Comic",
+    "version": "1.0.0",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/hcomic.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "hipmh",
+    "name": "嬉皮漫畫",
+    "version": "1.0.1",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/hipmh.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "hitomi",
+    "name": "hitomi.la",
+    "version": "1.1.2",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/hitomi.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "hot_manga",
+    "name": "热辣漫画",
+    "version": "1.0.0",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/hot_manga.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "ikmmh",
+    "name": "爱看漫",
+    "version": "1.0.6",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/ikmmh.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "ikmmh_v2",
+    "name": "爱看漫",
+    "version": "3.0.0",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/ikmmh_v2.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "jcomic",
+    "name": "jcomic.net",
+    "version": "1.0.0",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/jcomic.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "jm",
+    "name": "禁漫天堂",
+    "version": "1.4.0",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/jm.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "kavita",
+    "name": "Kavita",
+    "version": "1.0.0",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/kavita.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "komga",
+    "name": "Komga",
+    "version": "1.0.0",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/komga.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "laimanhua_split",
+    "name": "来漫画（分流）",
+    "version": "1.2.1",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/laimanhua_split_hosts_v1.2.1_configurable.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "lanraragi",
+    "name": "Lanraragi",
+    "version": "1.2.0",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/lanraragi.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "manga51",
+    "name": "51漫画",
+    "version": "1.2.0",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/manga51.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "manga_dex",
+    "name": "MangaDex",
+    "version": "1.2.0",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/manga_dex.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "manhuaren",
+    "name": "漫画人",
+    "version": "1.0.0",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/manhuaren.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "manhuauo_banana_v2",
+    "name": "香蕉漫画",
+    "version": "1.0.3",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/manhuauo_fixed_v2.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "manwaba",
+    "name": "漫蛙吧",
+    "version": "1.1.3",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/manwaba_fixed_v113.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "manwang",
+    "name": "漫网",
+    "version": "1.2.0",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/manwang_fixed_v120.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "mh1234",
+    "name": "漫画1234",
+    "version": "1.0.0",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/mh1234.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "mh18",
+    "name": "18漫画",
+    "version": "1.0.0",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/mh18.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "mh4399",
+    "name": "4399漫画网",
+    "version": "1.0.3",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/mh4399.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "mojoin_v2",
+    "name": "MOJOIN",
+    "version": "1.0.7",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/mojoin_fixed_v107.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "mxs",
+    "name": "漫小肆",
+    "version": "1.0.0",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/mxs.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "mycomic",
+    "name": "MYCOMIC",
+    "version": "1.1.0",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/mycomic.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "nhentai",
+    "name": "nhentai",
+    "version": "1.1.0",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/nhentai.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "noymanga",
+    "name": "NoyManga",
+    "version": "1.1.5",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/noymanga.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "picacg",
+    "name": "Picacg",
+    "version": "1.0.6",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/picacg.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "qq_comic_official_v1",
+    "name": "腾讯动漫（正版）",
+    "version": "1.0.3",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/tencent_comic_official.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "rawkuma",
+    "name": "Rawkuma",
+    "version": "1.1.0",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/rawkuma.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "rumanhua_fixed_v15",
+    "name": "如漫画",
+    "version": "1.2.8",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/rumanhua_fixed_v16.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "sfacg_manhua",
+    "name": "SF漫画",
+    "version": "1.0.0",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/sfacg_manhua.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "shonen_jump_plus",
+    "name": "少年ジャンプ＋",
+    "version": "1.1.1",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/shonen_jump_plus.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "tuku_cc",
+    "name": "图库漫画",
+    "version": "1.0.1",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/tuku_cc.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "webtoons_zh_hant",
+    "name": "LINE WEBTOON",
+    "version": "1.0.0",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/webtoons_zh_hant.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "wmanhua",
+    "name": "W漫画",
+    "version": "1.0.1",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/wmanhua.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "wnacg",
+    "name": "紳士漫畫",
+    "version": "1.0.6",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/wnacg.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "ykmh",
+    "name": "优酷漫画 (修复版)",
+    "version": "1.0.6",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/youku.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "zaimanhua",
+    "name": "再漫画",
+    "version": "1.0.2",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/zaimanhua.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "zerobyw33",
+    "name": "zero搬运网",
+    "version": "1.2.0",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/zerobyw33.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  }
+]
