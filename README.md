@@ -43,11 +43,6 @@ node harness/build-catalog.js --venera-configs <A> --venera-comic-source <B>   #
 node harness/verify-subscription.js --base <清单URL>                            # 复核订阅
 ```
 
-## 为什么值得
-
-上游源在列表解析的四个模式里各包了一个**空 `catch`**：站点一改版就"页面有 25 个画廊、
-结果 0 条、还不报错"。本仓的报警等式不靠硬编码常量，而是拿夹具结构对照：
-
 > **页面中承载画廊链接的行数 == 解析成功条数**
 
 不等 = 有行被静默丢弃 = 立刻失败并报出丢了几条。
