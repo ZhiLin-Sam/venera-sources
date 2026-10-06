@@ -2,11 +2,11 @@
   "devDependencies": {
     "jsdom": "^30.1.2"
   },
-  "name": "venera-ehentai-source",
+  "name": "venera-sources",
   "version": "0.1.0",
   "private": "true",
   "license": "UNLICENSED",
-  "description": "Optimized Venera comic source for E-Hentai/ExHentai, with fixture-driven regression tests",
+  "description": "私有 Venera 源目录仓库：汇总 57 个源（镜像 + 去重 + 体检），并为自有源提供夹具驱动的离线回归测试台",
   "scripts": {
     "test": "node --test",
     "audit": "node harness/audit-fixtures.js"

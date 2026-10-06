@@ -220,3 +220,67 @@ Dart `package:html` 0.15.7，仅 **CSS 选择器**（无 XPath、**无 `getAttri
   `"hotfix"`，否则按字典序 —— **它不是 SemVer**。
 - 注意两侧 `key` 正则不一致：catalog 的 `^\w+$` 允许数字开头，脚本侧不允许。
 
+## D12 汇总多源为目录仓库：镜像 + 去重 + 体检
+
+用户决策：**全量镜像**两个上游源仓库（并参考 `handahao666-boop/venera_comic_source`），
+发布为**私有**仓库 `venera-sources`。
+
+### 布局
+
+| 路径 | 内容 |
+|---|---|
+| `sources/mirror/venera-configs/` | 33 个文件（完整镜像，原样未改） |
+| `sources/mirror/venera_comic_source/` | 40 个文件（完整镜像，原样未改） |
+| `index.json` | 57 条去重后的清单（生成物） |
+
+两个上游**各自完整**镜像、分层存放：同名文件（`baozi.js`/`ccc.js`/`comick.js`/`copy_manga.js`/
+`goda.js`/`manga_dex.js`/`manhuagui.js`/`manhuaren.js`/`mycomic.js`/`shonen_jump_plus.js`/
+`zaimanhua.js`/`comic_walker.js` 等）**不会互相覆盖**，来源一眼可辨。
+
+### 去重
+
+73 个文件里 **16 组重复 key**。规则与宿主一致（`compareSemVer`，`parser.dart:24`）：
+前 3 段整数比较，第 4 段只特判 `"hotfix"`，否则字典序；**版本高者胜，同版本时主目录优先**。
+结果：57 条 = venera-configs 27 + venera_comic_source 29 + 自有 1。
+`copy_manga`/`Komiic`/`ykmh`/`manwaba` 四个 key 由 `venera_comic_source` 胜出（版本更高）。
+
+### ⚠️ 信脚本、不信清单（4 处纠正）
+
+汇总的第一版直接采用上游 `index.json` 的 key/version，结果被本项目**自己的契约测试**挡下：
+3 处清单版本与实际脚本不符。补齐后共 **4 处**：
+
+| 上游 | 文件 | 清单 | 脚本 | 后果 |
+|---|---|---|---|---|
+| venera-configs | `ehentai.js` | 1.1.8 | **1.2.0** | 不提示更新 |
+| venera-configs | `manwaba.js` | 1.0.2 | **1.0.3** | 不提示更新 |
+| venera-configs | `lanraragi.js` | 1.1.0 | **1.2.0** | 不提示更新 |
+| venera_comic_source | `copy_manga.js` | 1.6.7 | **1.6.6** | **更新循环** |
+
+最后一行是真 bug：宿主拿清单版本与已装版本比较，清单虚高 → 永远认为有更新 →
+装完仍是 1.6.6 → 无限循环。
+
+**因此 `harness/build-catalog.js` 一律以脚本自身声明的 key/version 为准**，
+清单只提供展示名与描述，差异写入 `docs/mirror-provenance.md`。
+`tests/source-repo.test.js` 会逐条核对 57 个条目 —— 这类错误不可能再悄悄回来。
+
+### 体检结论，以及一次扫描器误报的教训
+
+`harness/validate-sources.js` 对两个上游共 73 个源的结论：
+**加载失败 0、阻断 0、告警 1**。唯一告警是 `venera-configs/hitomi.js:795` 的
+`Array.prototype.toReversed()`（ES2023）—— 说明 D11 的"ES2022 **下界**"不等于"上界"，
+该源能否运行取决于 QuickJS-NG 的实际实现，需运行时验证，**不能凭静态扫描断言**。
+
+第一版体检器报了 34 个"问题"，**全是误报**，教训值得留档：
+
+| 被误报的名字 | 真实情况 |
+|---|---|
+| `XMLHttpRequest` | 只作为请求头**值**出现：`'x-requested-with': 'XMLHttpRequest'` |
+| `localStorage` | 局部变量 `const localStorage = this.loadData("_localStorage")`，或在注释里 |
+| `atob` | 只在注释里 —— 而注释内容（"venera 运行时不支持 atob"）**反向印证了 D11**：作者手写 base64 解码器 |
+| `document` | 局部变量 `const document = new HtmlDocument(res.body)` |
+
+修正办法（`harness/code-scan.js`）：先剥离注释与字符串/模板串，再排除**已声明的同名局部标识符**；
+并把结论降级为**告警**，阻断项只保留"一定会导致导入失败"的那些。
+已知局限（不认识正则字面量、不识别函数参数同名）写在该模块注释里 —— **不要把它当判据**。
+
+

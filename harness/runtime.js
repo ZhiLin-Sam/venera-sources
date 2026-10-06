@@ -169,6 +169,9 @@ function loadSource(sourcePath, options = {}) {
     HtmlDocument,
     ComicSource,
     console: sandboxConsole,
+    // 审计模式用：补齐宿主其余全局（UI / Convert / APP / …，见 harness/validate-sources.js）。
+    // 默认**不提供**，以保持"缺什么就响亮失败"，避免测试在假宿主上变绿。
+    ...(options.globals || {}),
   };
 
   const code = fs.readFileSync(sourcePath, 'utf8');
