@@ -54,8 +54,12 @@
    `https://purge.jsdelivr.net/gh/ZhiLin-Sam/venera-sources@main/index.json` 后，
    `cdn.jsdelivr.net` 与 `fastly.jsdelivr.net` **立即**返回新 60 条 / 14,868 B，
    而 `gcore.jsdelivr.net` 在复测时仍返回旧 56 条（该域名缓存更久，建议只在主域名不可用时才用）。
+   **purge 只清被请求的那一条 URL**：只 purge 清单时，端到端复核仍是 **58/60** ——
+   `dongman_la`、`ffppt` 的镜像脚本还是旧版；把本次变更的每个镜像文件逐个 purge 后才 60/60。
+   → 发布 SOP：purge 清单 + 对 `git diff --name-only <旧sha>..<新sha>` 里的每个 `sources/**`
+   文件各 purge 一次。
    → **判据**：要确认"新内容真的发出去了"，用 `@<commit-sha>` 或 `@v1.0.0` 这类**不可变引用**；
-   `@main` 适合日常订阅（接受延迟），要立即生效就在推送后调一次 purge。
+   `@main` 适合日常订阅（接受延迟），要立即生效就在推送后按上面的 SOP purge。
 3. DNS 同时返回 IPv6（如 `2a04:4e42::`、`2606:50c0::`）。若设备优先 IPv6 而该路径不通，
    可能表现为"偶发很慢"；这是设备/网络侧问题，与本仓无关。
 4. 本表不含 Gitee —— 它需要**另建仓库**（与"不新建仓库"的决定冲突）且对 NSFW 内容有审核下架风险。
