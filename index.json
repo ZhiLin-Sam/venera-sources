@@ -30,9 +30,9 @@
   {
     "key": "baozi",
     "name": "包子漫画",
-    "version": "1.1.6",
-    "fileName": "sources/mirror/venera-configs/baozi.js",
-    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
+    "version": "1.1.7",
+    "fileName": "sources/mirror/venera_comic_source/baozi.js",
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "bilimanga",
@@ -70,6 +70,20 @@
     "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
+    "key": "copy_manga_multi_accounts",
+    "name": "拷贝漫画(多账号)",
+    "version": "1.4.1",
+    "fileName": "sources/mirror/venera-configs/copy_manga_multi_accounts.js",
+    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
+  },
+  {
+    "key": "cxc",
+    "name": "CxC",
+    "version": "1.0.3",
+    "fileName": "sources/mirror/venera_comic_source/cxc.js",
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
+  },
+  {
     "key": "dm5",
     "name": "动漫屋",
     "version": "7.0.3",
@@ -79,7 +93,7 @@
   {
     "key": "dongman_la",
     "name": "动漫啦",
-    "version": "1.0.1",
+    "version": "1.0.5",
     "fileName": "sources/mirror/venera_comic_source/dongman_la_fixed_v101.js",
     "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
@@ -100,7 +114,7 @@
   {
     "key": "ffppt",
     "name": "飞翔漫画",
-    "version": "1.0.1",
+    "version": "1.0.3",
     "fileName": "sources/mirror/venera_comic_source/ffppt.js",
     "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
@@ -217,11 +231,18 @@
     "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
   },
   {
+    "key": "mangabz",
+    "name": "Mangabz",
+    "version": "1.0.0",
+    "fileName": "sources/mirror/venera_comic_source/mangabz.js",
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
+  },
+  {
     "key": "manhuaren",
     "name": "漫画人",
-    "version": "1.0.0",
-    "fileName": "sources/mirror/venera-configs/manhuaren.js",
-    "description": "镜像自 venera-configs（上游内容原样；行尾经 Git 规范化）"
+    "version": "1.0.1",
+    "fileName": "sources/mirror/venera_comic_source/manhuaren.js",
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
     "key": "manhuauo_banana_v2",
@@ -338,8 +359,15 @@
   {
     "key": "shonen_jump_plus",
     "name": "少年ジャンプ＋",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "fileName": "sources/mirror/venera_comic_source/shonen_jump_plus.js",
+    "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
+  },
+  {
+    "key": "sunday_webry",
+    "name": "サンデーうぇぶり",
+    "version": "1.0.0",
+    "fileName": "sources/mirror/venera_comic_source/sunday_webry.js",
     "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },
   {
@@ -373,7 +401,7 @@
   {
     "key": "ykmh",
     "name": "优酷漫画 (修复版)",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "fileName": "sources/mirror/venera_comic_source/youku.js",
     "description": "镜像自 venera_comic_source（上游内容原样；行尾经 Git 规范化）"
   },

@@ -1,7 +1,10 @@
 # venera-sources
 
-给 **Venera / Venera-Next** 用的**源目录仓库**：一条订阅地址装齐 **56 个源**，
+给 **Venera / Venera-Next** 用的**源目录仓库**：一条订阅地址装齐 **60 个源**，
 并自带**夹具驱动的回归测试台**，把「站点改版」变成一次可复现的测试失败。
+
+清单快照：**2026-10-26**（镜像自 `venera-configs@a04e055`（2026-10-19）、
+`venera_comic_source@3349bdd`（2026-10-22）的 `main`）。
 
 ## 订阅地址
 
@@ -15,7 +18,7 @@ https://raw.githubusercontent.com/ZhiLin-Sam/venera-sources/main/index.json     
 ```
 
 把任一条填进 App 的「漫画源列表」即可。**换域名不用改清单** —— 清单用相对路径，
-基准是清单自身的最终 URL，56 个脚本自动跟着走同一条线路。
+基准是清单自身的最终 URL，60 个脚本自动跟着走同一条线路。
 数据与判定方法见 [docs/endpoint-measurement.md](docs/endpoint-measurement.md)。
 
 > jsDelivr 会缓存分支引用，推送后更新可能滞后；要立刻生效用带代理的 raw 地址，
@@ -25,9 +28,9 @@ https://raw.githubusercontent.com/ZhiLin-Sam/venera-sources/main/index.json     
 
 | 路径 | 说明 |
 |---|---|
-| `index.json` | **订阅清单：56 条**（生成物，勿手改） |
+| `index.json` | **订阅清单：60 条**（生成物，勿手改） |
 | `sources/ehentai.js` | 自有源（本项目维护，夹具回归保护） |
-| `sources/mirror/**` | 两个上游仓库的完整镜像，73 个文件，分层存放 |
+| `sources/mirror/**` | 两个上游仓库的完整镜像，76 个文件，分层存放 |
 | `fixtures/cn-sxj/` | 33 份真实页面夹具（黄金样本，只读） |
 | `harness/` · `tests/` | 离线运行时与回归测试（`npm test`，51 项） |
 | `subscription/index.json` | 可选形态：只含清单 + `url` 引用，**不含他人代码** |
@@ -43,13 +46,18 @@ node harness/build-catalog.js --venera-configs <A> --venera-comic-source <B>   #
 node harness/verify-subscription.js --base <清单URL>                            # 复核订阅
 ```
 
+## 回归判据
+
+测试台不拿硬编码的条目数当断言，而是拿夹具自身的结构当 oracle：
+
 > **页面中承载画廊链接的行数 == 解析成功条数**
 
 不等 = 有行被静默丢弃 = 立刻失败并报出丢了几条。
 
 ## 边界与授权
 
-- ⚠️ 夹具条目停在 **2017–2019**：**挡得住回归，挡不住改版**。要挡改版必须补当前样本。
+- ⚠️ 夹具的"最后改动时间"跨 **2020-11-29 … 2026-04-30**，但被 oracle 保护的 10 个列表变体
+  **全部是 2020-11-29**：**挡得住回归，挡不住今天的改版**。要挡改版必须补当前样本。
 - 两个上游源仓库**都没有声明许可证**；本仓是其镜像并已公开分发，
   **收到权利人异议即删除对应文件**。见 [NOTICE.md](NOTICE.md)。
 - 工作规约见 [AGENTS.md](AGENTS.md)；关键决策与证据见 [docs/DECISIONS.md](docs/DECISIONS.md)。

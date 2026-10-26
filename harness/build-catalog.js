@@ -2,7 +2,7 @@
 /**
  * 汇总器：把多个上游源仓库合并成本仓库的 `index.json` + `sources/mirror/**` 镜像。
  *
- * 为什么要有生成脚本而不是手写 index.json：57 条清单里有 15 个 key 跨仓库重复，
+ * 为什么要有生成脚本而不是手写 index.json：清单里有 15 个 key 跨仓库重复，
  * 去重必须**按宿主自己的版本比较规则**决定谁赢，且要可复算、可复核、可重跑。
  *
  * 去重规则（与宿主一致，见 doc/api/comic_source.zh.md:354 与 parser.dart:24）：
@@ -274,7 +274,11 @@ function main() {
   const dupKeyCount = new Set(decisions.map((d) => d.key)).size;
   lines.push(`## 去重决策（重复 key ${dupKeyCount} 组 / 落选文件 ${decisions.length} 个）`);
   lines.push('');
-  lines.push('两个数字口径不同：一个 key 可能被丢过多次（如 `copy_manga` 有 3 个候选）。');
+  lines.push(
+    dupKeyCount === decisions.length
+      ? '每个重复 key 各有一个落选文件（本表一行即一次判定）。'
+      : '两个数字口径不同：一个 key 可能有多个候选，会在本表里出现多行。',
+  );
   if (!decisions.length) {
     lines.push('无重复 key。');
   } else {
@@ -330,7 +334,7 @@ function main() {
       );
     }
     lines.push('');
-    lines.push('清单虚高的风险举例：`copy_manga` 清单写 1.6.7 而脚本是 1.6.6，');
+    lines.push('清单虚高的风险举例（历史实例）：`copy_manga` 清单曾写 1.6.7 而脚本是 1.6.6，');
     lines.push('宿主以清单版本与已装版本比较 → 永远认为有更新，装完仍是 1.6.6，形成更新循环。');
   }
   lines.push('');

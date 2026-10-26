@@ -3,6 +3,9 @@
 本文件记录**为什么这么做**，以及支撑每条结论的可复核证据。凡涉及夹具的结构性事实，
 均由 `tests/harness.test.js` 自动断言钉住，不靠人工记忆。
 
+> **条目数口径**：本文各条记录的是**当时**的实测状态；当前数字一律以 `index.json` 为准。
+> 2026-10-26 上游刷新后为 **60 条 / 镜像 76 文件**，刷新明细见文末 **D14**。
+
 ---
 
 ## D1 测试台用 jsdom，而不用 linkedom / cheerio
@@ -233,6 +236,8 @@ Dart `package:html` 0.15.7，仅 **CSS 选择器**（无 XPath、**无 `getAttri
 | `sources/mirror/venera_comic_source/` | 40 个文件（完整镜像，原样未改） |
 | `index.json` | 57 条去重后的清单（生成物） |
 
+> 2026-10-26 刷新后：33 + 43 = **76** 个镜像文件、**60** 条清单（见 D14）。
+
 两个上游**各自完整**镜像、分层存放：同名文件（`baozi.js`/`ccc.js`/`comick.js`/`copy_manga.js`/
 `goda.js`/`manga_dex.js`/`manhuagui.js`/`manhuaren.js`/`mycomic.js`/`shonen_jump_plus.js`/
 `zaimanhua.js`/`comic_walker.js` 等）**不会互相覆盖**，来源一眼可辨。
@@ -324,6 +329,48 @@ L1 里有 **2 组"同版本 + 内容不同"**。我原来的规则"版本相同 
    `manwang_fixed_v120.js:15` **注释行**里的 `AES key = "..."` 当成了类字段，报出假阳性；
    而且会把取到的值原文打印出来。合仓后 `npm test` 用 `loadSource` **真求值**校验清单，
    因此该工具已删除。
+
+## D14 2026-10-26 上游刷新记录（镜像 73→76、清单 56→60）
+
+上游两个仓库在 2026-10-05 基线之后仍有提交。本次按 `AGENTS.md` 硬规则 7 重新生成，
+**没有手改任何生成物**（`index.json`、`sources/mirror/**`、`docs/mirror-provenance.md`、
+`subscription/index.json` 全部由脚本产出）。
+
+| 项 | 刷新前 | 刷新后 |
+|---|---|---|
+| 上游快照 | `venera-configs`、`venera_comic_source` 均为 2026-10-05 抓取 | `venera-configs@a04e055`（2026-10-19）、`venera_comic_source@3349bdd`（2026-10-22） |
+| 镜像文件 | 73（33 + 40） | **76**（33 + 43） |
+| 清单条目 | 56 | **60**（`venera-configs` 23 + `venera_comic_source` 36 + 自有 1） |
+| 去重判定 | 15 组 / 16 个落选文件 | 15 组 / 15 个落选文件（`copy_manga_multi_accounts` 换 key 后不再落入 `copy_manga` 组） |
+| 人工覆盖（同版本+内容不同） | 2 处（`comic_walker`、`shonen_jump_plus`） | 1 处（`comic_walker`；`shonen_jump_plus` 已随上游升到 1.2.0，版本规则直接胜出） |
+| 语义冗余摘除 | 1 条（`ikmmh`） | 1 条（`ikmmh`） |
+| 版本纠正（信脚本、不信清单） | 3 处 | 3 处（`ehentai` 1.1.8→1.2.0、`manwaba` 1.0.2→1.0.3、`lanraragi` 1.1.0→1.2.0） |
+
+**清单新增 4 条**：
+
+| key | 版本 | 来源 | 说明 |
+|---|---|---|---|
+| `mangabz` | 1.0.0 | venera_comic_source | 全新源（`minAppVersion 1.6.3`） |
+| `cxc` | 1.0.3 | venera_comic_source | 全新源（`minAppVersion 1.6.3`） |
+| `sunday_webry` | 1.0.0 | venera_comic_source | 全新源 |
+| `copy_manga_multi_accounts` | 1.4.1 | venera-configs | 旧版 `key = "copy_manga"` 与普通版撞 key，因此不可达（D13 的 L4 变体）；上游 2026-10 把 key 改成独立值后自然进入清单，**本仓未改他人代码** |
+
+**镜像内容更新 8 个文件**：`venera-configs/copy_manga.js`、`venera-configs/copy_manga_multi_accounts.js`、
+`venera_comic_source/{baozi,dongman_la_fixed_v101,ffppt,manhuaren,shonen_jump_plus,youku}.js`。
+清单版本随之变化：`baozi` 1.1.6→1.1.7、`dongman_la` 1.0.1→1.0.5、`ffppt` 1.0.1→1.0.3、
+`manhuaren` 1.0.0→1.0.1（并改由 `venera_comic_source` 提供）、`shonen_jump_plus` 1.1.1→1.2.0、
+`ykmh` 1.0.6→1.0.7；`copy_manga` 仍为 1.6.6（内容更新、版本未变）。
+另有 65 个原有镜像文件与上次字节一致（行尾规范化后比对），并新增 3 个文件。
+
+**校验**：
+
+- `npm test` → **51/51 通过**（订阅清单已用 `harness/build-subscription.js` 同步重建为 60 条、全部 `url`）。
+- `harness/validate-sources.js` 覆盖全部 76 个镜像文件：**加载失败 0 / 阻断 0**；告警仅
+  `venera-configs/hitomi.js` 的 ES2023 `toReversed()`（D11 既有结论，非本轮新增）。
+- 自有源 `sources/ehentai.js` 与上游 `ehentai.js` 1.2.0 **字节一致**（上游自基线未改），本轮未动。
+
+**口径说明**：D12 当时按"私有仓库"设计；当前该 GitHub 仓库已转为**公开**状态，
+授权状态与再分发口径以 `NOTICE.md` 为准。
 
 
 

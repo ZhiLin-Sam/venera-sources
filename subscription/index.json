@@ -30,9 +30,9 @@
   {
     "key": "baozi",
     "name": "包子漫画",
-    "version": "1.1.6",
-    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/baozi.js",
-    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+    "version": "1.1.7",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/baozi.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
   },
   {
     "key": "bilimanga",
@@ -70,6 +70,20 @@
     "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
   },
   {
+    "key": "copy_manga_multi_accounts",
+    "name": "拷贝漫画(多账号)",
+    "version": "1.4.1",
+    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/copy_manga_multi_accounts.js",
+    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "cxc",
+    "name": "CxC",
+    "version": "1.0.3",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/cxc.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
     "key": "dm5",
     "name": "动漫屋",
     "version": "7.0.3",
@@ -79,7 +93,7 @@
   {
     "key": "dongman_la",
     "name": "动漫啦",
-    "version": "1.0.1",
+    "version": "1.0.5",
     "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/dongman_la_fixed_v101.js",
     "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
   },
@@ -100,7 +114,7 @@
   {
     "key": "ffppt",
     "name": "飞翔漫画",
-    "version": "1.0.1",
+    "version": "1.0.3",
     "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/ffppt.js",
     "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
   },
@@ -217,11 +231,18 @@
     "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
   },
   {
+    "key": "mangabz",
+    "name": "Mangabz",
+    "version": "1.0.0",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/mangabz.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
     "key": "manhuaren",
     "name": "漫画人",
-    "version": "1.0.0",
-    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/manhuaren.js",
-    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+    "version": "1.0.1",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/manhuaren.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
   },
   {
     "key": "manhuauo_banana_v2",
@@ -338,9 +359,16 @@
   {
     "key": "shonen_jump_plus",
     "name": "少年ジャンプ＋",
-    "version": "1.1.1",
-    "url": "https://cdn.jsdelivr.net/gh/venera-app/venera-configs@main/shonen_jump_plus.js",
-    "description": "来自 venera-configs 的上游原样文件（本清单不复制代码）"
+    "version": "1.2.0",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/shonen_jump_plus.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
+  },
+  {
+    "key": "sunday_webry",
+    "name": "サンデーうぇぶり",
+    "version": "1.0.0",
+    "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/sunday_webry.js",
+    "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
   },
   {
     "key": "tuku_cc",
@@ -373,7 +401,7 @@
   {
     "key": "ykmh",
     "name": "优酷漫画 (修复版)",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "url": "https://cdn.jsdelivr.net/gh/handahao666-boop/venera_comic_source@main/youku.js",
     "description": "来自 venera_comic_source 的上游原样文件（本清单不复制代码）"
   },
