@@ -21,8 +21,10 @@ https://raw.githubusercontent.com/ZhiLin-Sam/venera-sources/main/index.json     
 基准是清单自身的最终 URL，60 个脚本自动跟着走同一条线路。
 数据与判定方法见 [docs/endpoint-measurement.md](docs/endpoint-measurement.md)。
 
-> jsDelivr 会缓存分支引用，推送后更新可能滞后；要立刻生效用带代理的 raw 地址，
-> 或发布 tag 后改用 `@v1.0.0` 这类版本化地址。
+> jsDelivr 会缓存分支引用，推送后更新可能滞后；要立刻生效可调一次
+> `https://purge.jsdelivr.net/gh/ZhiLin-Sam/venera-sources@main/index.json`，
+> 或发布 tag 后改用 `@v1.0.0` 这类版本化地址（缓存实测见
+> [docs/endpoint-measurement.md](docs/endpoint-measurement.md)）。
 
 ## 内容
 
