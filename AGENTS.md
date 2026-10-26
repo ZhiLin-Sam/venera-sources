@@ -34,9 +34,10 @@
    一个可降级的封装里，不得散落在业务逻辑中。
 5. **不碰上游仓库**：`Ehviewer_CN_SXJ/`、`venera/`、`Venera-Next/` 全部只读。只从它们**拷出**内容。
 6. **不提交**：`node_modules/`、任何抓取到的实时页面、任何凭证/cookie。夹具只收已脱敏的静态样本。
-7. **`index.json` 是生成物**：只能由 `node harness/build-catalog.js --venera-configs <A> --venera-comic-source <B>`
-   生成，禁止手改 —— 手工改动会在下次汇总时丢失，且极易引入重复 key 或版本不符。
-   清单版本一律以**脚本自身声明**为准（上游清单有 4 处是错的，见 `docs/DECISIONS.md` D12）。
+7. **生成物不许手改**：`index.json` 由 `node harness/build-catalog.js --venera-configs <A> --venera-comic-source <B>`
+   生成；`README.md` 的单项源表由 `node harness/build-readme.js` 生成。清单版本一律以**脚本自身声明**
+   为准（上游清单有 4 处是错的，见 `docs/DECISIONS.md` D12）。
+   `npm test` 会核对 README 与 `index.json` 一致 —— **刷新清单后必须重跑这两个生成器**。
 8. 提交信息用 Conventional Commits，正文中文。
 
 ## 3. 验证方式

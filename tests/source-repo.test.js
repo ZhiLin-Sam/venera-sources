@@ -20,6 +20,7 @@ const path = require('node:path');
 const { loadSource } = require('../harness/runtime');
 const { HOST_STUBS } = require('../harness/validate-sources');
 const { findAbsentGlobals, findTooNew } = require('../harness/code-scan');
+const { SRC_BASE } = require('../harness/build-readme');
 
 const ROOT = path.join(__dirname, '..');
 const INDEX = path.join(ROOT, 'index.json');
@@ -135,4 +136,38 @@ test('subscription/index.json（对外发布的那份）与 index.json 一致且
   for (const entry of main) {
     assert.ok(subByKey.has(entry.key), `main 有 subscription 没有的 key: ${entry.key}`);
   }
+});
+
+test('README 的单项源表与 index.json 一致（生成物，勿手改）', () => {
+  // README 由 harness/build-readme.js 生成；清单更新后忘记重跑 = 用户复制到旧地址/旧版本。
+  const readme = fs.readFileSync(path.join(ROOT, 'README.md'), 'utf8');
+  const lines = readme.split(/\r?\n/);
+  const headerIdx = lines.findIndex((l) => l.trim() === '| 源 | key | 版本 | 单项地址 |');
+  assert.ok(headerIdx >= 0, 'README 缺少单项源表表头（应为：| 源 | key | 版本 | 单项地址 |）');
+
+  const rows = [];
+  for (let i = headerIdx + 2; i < lines.length; i += 1) {
+    const line = lines[i].trim();
+    if (!line.startsWith('|')) break;
+    const cells = line.slice(1, -1).split('|').map((s) => s.trim());
+    assert.equal(cells.length, 4, `README 表格行列数异常: ${line}`);
+    rows.push({
+      name: cells[0],
+      key: cells[1].replace(/^`|`$/g, ''),
+      version: cells[2],
+      url: cells[3],
+    });
+  }
+
+  const expected = readIndex().map((e) => ({
+    name: e.name,
+    key: e.key,
+    version: e.version,
+    url: `${SRC_BASE}${e.fileName}`,
+  }));
+  assert.deepEqual(
+    rows,
+    expected,
+    'README 单项源表与 index.json 不一致：请运行 `node harness/build-readme.js` 重新生成',
+  );
 });
